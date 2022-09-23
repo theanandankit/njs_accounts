@@ -1,4 +1,13 @@
 const User = require("../models/user.model.js");
+const { WebClient } = require('@slack/web-api');
+
+// Read a token from the environment variables
+const token = process.env.SLACK_TOKEN;
+// Initialize
+const web = new WebClient(token);
+
+// Given some known conversation ID (representing a public channel, private channel, DM or group DM)
+const conversationId = '...';
 
 // Create and Save a new User
 exports.create = function (req, res)  {
@@ -27,6 +36,11 @@ exports.create = function (req, res)  {
               err.message || "Some error occurred while creating the User."
           });
         else res.send(data);
+      });
+
+      web.chat.postMessage({
+        text: 'New user ' - user.email + ' ' + user.firstName + ' ' + user.phone + ' ' + user.dob,
+        channel: conversationId,
       });
 };
 
@@ -58,6 +72,10 @@ exports.findOne = function (req, res)  {
             });
           }
         } else res.send(data);
+        web.chat.postMessage({
+          text: 'Fetch user details ' - data.email + ' ' + data.firstName + ' ' + data.phone + ' ' + data.dob,
+          channel: conversationId,
+        });        
       });  
 };
 
@@ -87,6 +105,10 @@ exports.update = function (req, res) {
           });
         }
       } else res.send(data);
+      web.chat.postMessage({
+        text: 'User details updated ' - data.email + ' ' + data.firstName + ' ' + data.phone + ' ' + data.dob,
+        channel: conversationId,
+      });      
     }
   );  
 };

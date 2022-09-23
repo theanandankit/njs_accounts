@@ -52,3 +52,12 @@ function testone() {
 }
 
 testone();
+
+const externalfunc = require('./sampleone')
+
+function testtwo() {
+    var name = "Pandurang";
+    console.log(name);
+    externalfunc(name);
+}
+testtwo();
