@@ -1,6 +1,8 @@
 const User = require("../models/user.model.js");
 const { WebClient } = require('@slack/web-api');
+const sgMail = require('@sendgrid/mail');
 
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 // Read a token from the environment variables
 const token = process.env.SLACK_TOKEN;
 // Initialize
@@ -41,6 +43,21 @@ exports.create = function (req, res)  {
       web.chat.postMessage({
         text: 'New user ' - user.email + ' ' + user.firstName + ' ' + user.phone + ' ' + user.dob,
         channel: conversationId,
+      });
+
+      const msg = {
+        to: user.email,
+        from: 'test@example.com', // Use the email address or domain you verified above
+        subject: 'Welcome note',
+        text: 'Some message ' + user.firstName + user.password,
+        html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+      };
+      sgMail.send(msg).then(() => {}, error => {
+            console.error(error);
+
+            if (error.response) {
+              console.error(error.response.body)
+            }
       });
 };
 
