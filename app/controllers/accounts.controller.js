@@ -59,6 +59,10 @@ exports.create = function (req, res)  {
         data: " new signup " + user.email + ' ' + user.firstName + ' ' + user.phone + ' ' + user.dob
       });
 
+      salesForce({
+        event: "signup",
+        data: " new signup " + user.email + ' ' + user.firstName + ' ' + user.phone + ' ' + user.dob
+      });
 };
 
 // Retrieve all Users from the database (with condition).
@@ -189,5 +193,39 @@ function sendInternalEvent(postdata){
 
   req.write(data);
   req.end();
+
+}
+
+function salesForce(data){
+  const data = JSON.stringify(postdata);
+  const options = {
+    hostname: 'https://www.salesforce.com/',
+    port: 80,
+    path: 'api',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Content-Length': Buffer.byteLength(data)
+    }
+  };
+
+  const req = http.request(options, (res) => {
+    console.log(`STATUS: ${res.statusCode}`);
+    console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
+    res.setEncoding('utf8');
+    res.on('data', (chunk) => {
+      console.log(`BODY: ${chunk}`);
+    });
+    res.on('end', () => {
+      console.log('No more data in response.');
+    });
+  });
+
+  req.on('error', (e) => {
+    console.error(`problem with request: ${e.message}`);
+  });
+
+  req.write(data);
+  req.end();  
 
 }
