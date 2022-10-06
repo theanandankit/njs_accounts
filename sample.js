@@ -56,7 +56,7 @@ testone();
 const externalfunc = require('./sampleone')
 
 function testtwo() {
-    var name = "Pandurang";
+    var name = "Pandurang-external";
     console.log(name);
     externalfunc(name);
 }
