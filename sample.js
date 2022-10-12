@@ -53,11 +53,24 @@ function testone() {
 
 testone();
 
-const externalfunc = require('./sampleone')
+const wrapperFunction = () => {
 
-function testtwo() {
-    var name = "Pandurang-external";
+const testArrow = (name) => {
     console.log(name);
-    externalfunc(name);
+}
+
+const externalfunc = require('./sample/one/sampleone')
+
+const testtwo = () => {
+    var name = "Pandurang-external";
+
+    var wrapperObj = {
+        name_test : name
+    }
+    console.log(wrapperObj);
+    externalfunc(wrapperObj);
+    return testArrow(wrapperObj);
 }
 testtwo();
+}
+
