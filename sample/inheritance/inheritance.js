@@ -1,23 +1,23 @@
-import Animal from "./Animal";
+import Sentry from "@sentry/core";
+import Amplitude from "@amplitude/core";
+import Musician from "./Musician";
   
-class Dog extends Animal {
-  constructor(name, sound, breed) {
-    super(name, sound);
-    this.breed = breed;
-  }
-
-  bark() {
-    console.log(`${this.name} barks loudly!`);
+class MusicWithLyrics extends Musician {
+  constructor(name, song, lyrics) {
+    super(name, song);
+    this.lyrics = lyrics;
   }
 }
 
 // Create a new Animal instance
-const myAnimal = new Animal('Cow', 'yak');
-myAnimal.speak();
+const myMusician = new Musician('Rafi', 'song1');
+myMusician.sing();
+Amplitude.send(myMusician);
 
 // Create a new Dog instance
-const myDog = new Dog('Fido', 'woof', 'Labrador');
+const myMusicWithLyrics = new MusicWithLyrics('Fido', 'song1', 'lyrics');
 
 // Call methods on the Dog instance
-myDog.bark(); // Output: "Fido barks loudly!"
-myDog.speak(); // Output: "Fido says woof"
+myMusicWithLyrics.direct(); // Output: "Fido barks loudly!"
+myMusicWithLyrics.sing(); // Output: "Fido says woof"
+Sentry.upload(myMusicWithLyrics);
