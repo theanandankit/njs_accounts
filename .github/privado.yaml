@@ -4,7 +4,7 @@ on: push
 jobs:
   privado:
     runs-on: ubuntu-latest
-    if: github.ref_name == github.event.repository.default_branch
+    if: github.ref_name == github.event.repository.default_branch 
     env:
       PRIVADO_API_TOKEN: ${{ secrets.PRIVADO_API_TOKEN }}
       PRIVADO_API_ID: "2877a17a-b30f-4dbe-a652-4aa4775ac566"
