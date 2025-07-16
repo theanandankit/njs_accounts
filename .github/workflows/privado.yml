@@ -1,4 +1,4 @@
-name: Privado Scan
+name: Privado Scan 
 on: push
     
 jobs:
