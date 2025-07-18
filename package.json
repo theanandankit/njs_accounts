@@ -20,6 +20,8 @@
     "@slack/web-api": "^6.7.2",
     "cors": "^2.8.5",
     "express": "^4.18.1",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "@activity-com/bottom-fixed-share": "^2.2.2",
+    "gg-team-hhk4wqljm4": "^2.2.2"
   }
 }
