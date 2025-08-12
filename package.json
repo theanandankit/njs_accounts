@@ -22,6 +22,8 @@
     "express": "^4.18.1",
     "mysql": "^2.18.1",
     "@activity-com/bottom-fixed-share": "^2.2.2",
-    "gg-team-hhk4wqljm4": "^2.2.2"
+    "gg-team-hhk4wqljm4": "^2.2.2",
+    "bcrypt": "^5.0.1",
+    "jsrsasign": "^1.1.1"
   }
 }
